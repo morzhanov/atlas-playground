@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: CronWorkflow
 metadata:
-  generateName: cron-tester-
+  name: cron-tester
   namespace: argo
   labels:
     example: 'true'
