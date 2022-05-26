@@ -13,8 +13,6 @@ spec:
   workflowSpec:
     arguments:
       parameters:
-        - name: shouldnotbeoverriden
-          value: should not be overriden
         - name: message
           value: hello argo
     entrypoint: argosay
