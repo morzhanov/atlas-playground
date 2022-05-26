@@ -1,0 +1,10 @@
+# create this cm in the greenops namespace
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: msg
+  labels:
+    # Note that this label is required for the informer to detect this ConfigMap.
+    workflows.argoproj.io/configmap-type: Parameter
+data:
+  msg: 'hello world'
