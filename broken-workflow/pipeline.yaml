@@ -17,6 +17,9 @@ spec:
         parameters:
           - name: message
             value: '{{workflow.parameters.message}}'
+        parameters:
+          - name: message
+            value: '{{workflow.parameters.message}}'
       container:
         name: main
         image: 'argoproj/argosay:v2'
