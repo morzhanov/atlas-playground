@@ -1,18 +1,19 @@
 metadata:
-  Name: broken-workflow
-#  namespace: argo
+  generateName: broken
+  namespace: argo
   labels:
     example: 'true'
     clusterName: 'hubcluster'
 spec:
   arguments:
-    parameters:
-      - name: message
-        value: hello argo
+#    parameters:
+#      - name: shouldnotbeoverriden
+#        value: should not be overriden
+#      - name: message
+#        value: hello argo
   entrypoint: argosay
   templates:
     - name: argosay
-      badinputparam: wrong
       inputs:
         parameters:
           - name: message
