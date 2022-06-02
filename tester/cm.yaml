@@ -7,5 +7,6 @@ metadata:
     # Note that this label is required for the informer to detect this ConfigMap.
     workflows.argoproj.io/configmap-type: Parameter
 data:
-  msg: 'hello world'
+  msg: "hello world"
   message: message
+  num: "2"
