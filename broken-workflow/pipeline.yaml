@@ -13,16 +13,6 @@ spec:
         value: hello argo
       - name: nil
         value: nil
-      - name: basecmnum
-          valueFrom:
-            configMapKeyRef:
-              name: simple-parameters
-              key: num
-      - name: basecmstr
-          valueFrom:
-            configMapKeyRef:
-              name: simple-parameters
-              key: message
   entrypoint: argosay
   templates:
     - name: argosay
