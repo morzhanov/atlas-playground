@@ -5,19 +5,21 @@ metadata:
     example: 'true'
     clusterName: 'hubcluster'
 spec:
-#  arguments:
-#    parameters:
-#      - name: shouldnotbeoverriden
-#        value: should not be overriden
-#      - name: message
-#        value: hello argo
+  arguments:
+    parameters:
+      - name: shouldnotbeoverriden
+        value: should not be overriden
+      - name: message
+        value: hello argo
+      - name: nil
+        value: nil
   entrypoint: argosay
   templates:
     - name: argosay
-#      inputs:
-#        parameters:
-#          - name: message
-#            value: '{{workflow.parameters.message}}'
+      inputs:
+        parameters:
+          - name: message
+            value: '{{workflow.parameters.message}}'
       container:
         name: main
         image: 'argoproj/argosay:v2'
@@ -25,8 +27,7 @@ spec:
           - /argosay
         args:
           - echo
-#          - '{{inputs.parameters.message}}'
-          - 'message-'
+          - '{{inputs.parameters.message}}'
   ttlStrategy:
     secondsAfterCompletion: 300
   podGC:
