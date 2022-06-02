@@ -9,8 +9,8 @@ arguments:
         configMapKeyRef:
           name: simple-parameters
           key: message
-#    - name: cmvalue2
-#        valueFrom:
-#          configMapKeyRef:
-#            name: simple-parameters
-#            key: num
+    - name: cmvalue2
+        valueFrom:
+          configMapKeyRef:
+            name: simple-parameters
+            key: num
