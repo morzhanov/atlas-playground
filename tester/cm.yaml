@@ -8,3 +8,4 @@ metadata:
     workflows.argoproj.io/configmap-type: Parameter
 data:
   msg: 'hello world'
+  message: message

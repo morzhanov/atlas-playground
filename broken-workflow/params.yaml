@@ -8,4 +8,4 @@ arguments:
       valueFrom:
         configMapKeyRef:
           name: simple-parameters
-          key: msg
+          key: message
