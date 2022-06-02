@@ -5,7 +5,7 @@ metadata:
     example: 'true'
     clusterName: 'hubcluster'
 spec:
-  arguments:
+#  arguments:
 #    parameters:
 #      - name: shouldnotbeoverriden
 #        value: should not be overriden
