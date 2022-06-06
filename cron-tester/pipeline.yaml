@@ -30,8 +30,7 @@ spec:
           command:
             - /argosay
           args:
-            - echo
-            - '{{inputs.parameters.message}}'
+            - exit 1
     ttlStrategy:
       secondsAfterCompletion: 300
     podGC:
