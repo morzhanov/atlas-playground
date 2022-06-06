@@ -1,7 +1,7 @@
 arguments:
   parameters:
-    - name: message
-      value: hello world override
+#    - name: message
+#      value: hello world override
     - name: additional
       value: additional parameter
 #    - name: cmvalue
