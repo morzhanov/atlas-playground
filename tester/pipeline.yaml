@@ -9,8 +9,8 @@ spec:
     parameters:
       - name: shouldnotbeoverriden
         value: should not be overriden
-      - name: message
-        value: hello argo
+#      - name: message
+#        value: hello argo
   entrypoint: argosay
   templates:
     - name: argosay
