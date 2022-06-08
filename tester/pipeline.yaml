@@ -12,6 +12,10 @@ spec:
         value: should not be overriden
       - name: message
         value: hello argo
+      - name: meta-example
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.namespace
   entrypoint: argosay
   templates:
     - name: argosay
