@@ -14,17 +14,17 @@ arguments:
         configMapKeyRef:
           name: simple-parameters
           key: message
-    - name: cm-example-2
+    - name: cm-example
       valueFrom:
         configMapKeyRef:
           key: message
           name: simple-parameters
-    - name: job-name-2
+    - name: job-name
       valueFrom:
-        jsonPath: '{.metadata.name}'
-    - name: job-obj-2
+        jsonPath: '{.metadata.namespace}'
+    - name: job-obj
       valueFrom:
-        jqFilter: '.'
-    - name: previous_step_output-2
+        jqFilter: '._UPDATED'
+    - name: previous_step_output
       valueFrom:
-        path: /command_output/result.txt
+        path: /command_output/result_UPDATED.txt
