@@ -8,14 +8,27 @@ metadata:
 spec:
   arguments:
     parameters:
-      - name: shouldnotbeoverriden
-        value: should not be overriden
       - name: message
-        value: hello argo
-      - name: meta-example
+        value: hello world
+      - name: cmvalue
         valueFrom:
-          fieldRef:
-            fieldPath: metadata.namespace
+          configMapKeyRef:
+            name: simple-parameters
+            key: message
+      - name: cm-example
+        valueFrom:
+          configMapKeyRef:
+            key: message
+            name: simple-parameters
+      - name: job-name
+        valueFrom:
+          jsonPath: '{.metadata.name}'
+      - name: job-obj
+        valueFrom:
+          jqFilter: '.'
+      - name: previous_step_output
+        valueFrom:
+          path: /command_output/result.txt
   entrypoint: argosay
   templates:
     - name: argosay

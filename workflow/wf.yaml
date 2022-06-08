@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Workflow
 metadata:
-  name: example-workflow
+  name: example-workflow-4
 spec:
   entrypoint: whalesay
   arguments:
@@ -13,8 +13,22 @@ spec:
           configMapKeyRef:
             name: simple-parameters
             key: message
+      - name: cm-example
+        valueFrom:
+          configMapKeyRef:
+            key: message
+            name: simple-parameters
+      - name: job-name
+        valueFrom:
+          jsonPath: '{.metadata.name}'
+      - name: job-obj
+        valueFrom:
+          jqFilter: '.'
+      - name: previous_step_output
+        valueFrom:
+          path: /command_output/result.txt
   templates:
-    - name: whalesay
+    - name: whalesays
       inputs:
         parameters:
           - name: message
