@@ -4,6 +4,7 @@ metadata:
   labels:
     example: 'true'
     clusterName: 'hubcluster'
+    argo-namespace: 'argo-2'
 spec:
   arguments:
     parameters:
