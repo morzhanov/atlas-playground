@@ -6,18 +6,18 @@ metadata:
     clusterName: 'hubcluster'
 spec:
   arguments:
-    parameters:
-      - name: shouldnotbeoverriden
-        value: should not be overriden
-      - name: message
-        value: hello argo
-      - name: nil
-        value: nil
-      - name: cmvalue2
-        valueFrom:
-          configMapKeyRef:
-            name: simple-parameters
-            key: message
+#    parameters:
+#      - name: shouldnotbeoverriden
+#        value: should not be overriden
+#      - name: message
+#        value: hello argo
+#      - name: nil
+#        value: nil
+#      - name: cmvalue2
+#        valueFrom:
+#          configMapKeyRef:
+#            name: simple-parameters
+#            key: message
   entrypoint: argosay
   templates:
     - name: argosay
