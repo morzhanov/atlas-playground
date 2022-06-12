@@ -11,10 +11,10 @@ spec:
   concurrencyPolicy: "Replace"
   startingDeadlineSeconds: 0
   workflowSpec:
-    arguments:
-      parameters:
-        - name: message
-          value: hello argo
+#    arguments:
+#      parameters:
+#        - name: message
+#          value: hello argo
     entrypoint: argosay
     templates:
       - name: argosay
