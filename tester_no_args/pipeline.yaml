@@ -1,0 +1,27 @@
+metadata:
+  generateName: tester-
+  namespace: argo
+  labels:
+    example: 'true'
+    clusterName: 'hubcluster'
+    argo-namespace: 'argo-2'
+spec:
+  entrypoint: argosay
+  templates:
+    - name: argosay
+      inputs:
+        parameters:
+          - name: message
+            value: '{{workflow.parameters.message}}'
+      container:
+        name: main
+        image: 'argoproj/argosay:v2'
+        command:
+          - /argosay
+        args:
+          - echo
+          - '{{inputs.parameters.message}}'
+  ttlStrategy:
+    secondsAfterCompletion: 300
+  podGC:
+    strategy: OnPodCompletion
