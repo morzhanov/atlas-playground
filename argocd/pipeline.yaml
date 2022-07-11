@@ -1,0 +1,6 @@
+name: plugin_and_test_pipeline
+argo_version_lock: true
+cluster_name: in-cluster
+steps:
+- name: deploy_to_dev
+  application_path: testapp_dev.yml
