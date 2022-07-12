@@ -11,4 +11,4 @@ spec:
     path: argocd/argo_manifest/dev
   destination:
     server: https://kubernetes.default.svc
-    namespace: dev
+    namespace: argocd
