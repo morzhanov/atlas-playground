@@ -4,8 +4,8 @@ arguments:
       value: hello world override
     - name: additional
       value: additional parameter
-    - name: additional4
-      value: additional4 parameter
+    - name: additional5
+      value: additional5 parameter
     - name: cmvalue
       valueFrom:
         configMapKeyRef:
