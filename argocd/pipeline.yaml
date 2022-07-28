@@ -1,5 +1,5 @@
 metadata:
-  generateName: argocd-testapp-
+  generateName: argocd-testapp-metrics-
   namespace: argo
   labels:
     clusterName: hubcluster
@@ -9,6 +9,16 @@ spec:
     parameters:
       - name: example
         value: example
+      - name: application-name-dev
+        value: testapp-dev
+      - name: application-name-stag
+        value: testapp-staging
+      - name: revision
+        value: main
+      - name: argocd-server-address
+        value: argocd-server.argocd.svc.cluster.local
+      - name: argocd-credentials-secret
+        value: argocd-user
   templates:
     - name: starter
       steps:
