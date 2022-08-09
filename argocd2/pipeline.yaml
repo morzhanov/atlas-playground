@@ -8,7 +8,7 @@ spec:
   arguments:
     parameters:
       - name: example
-        value: example5
+        value: example6
       - name: application-name-dev
         value: testapp-dev
       - name: application-name-stag
