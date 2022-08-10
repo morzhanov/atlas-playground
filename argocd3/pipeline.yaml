@@ -1,5 +1,5 @@
 metadata:
-  generateName: argocd-testapp-metrics3-
+  generateName: argocd-testapp-successes2-
   namespace: argo
   labels:
     clusterName: hubcluster
@@ -22,10 +22,10 @@ spec:
   templates:
     - name: starter
       steps:
-        - - name: deploy-to-dev3
+        - - name: deploy-to-dev-successes2
             templateRef:
-              name: argocd-step
-              template: argocd-sync-and-wait
+              name: argocd-step3
+              template: argocd-sync-and-wait3
             arguments:
               parameters:
                 - name: application-name
