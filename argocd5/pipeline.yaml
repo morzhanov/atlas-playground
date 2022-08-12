@@ -24,7 +24,7 @@ spec:
       steps:
         - - name: deploy-to-dev-successes5
             templateRef:
-              name: argocd-step3
+              name: argocd-step5
               template: argocd-sync-and-wait5
             arguments:
               parameters:
