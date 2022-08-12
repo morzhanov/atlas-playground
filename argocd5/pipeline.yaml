@@ -1,5 +1,5 @@
 metadata:
-  generateName: argocd-testapp-successes3-
+  generateName: argocd-testapp-successes5-
   namespace: argo
   labels:
     clusterName: hubcluster
