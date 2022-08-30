@@ -25,7 +25,7 @@ spec:
         - - name: deploy-to-dev-successes7
             templateRef:
               name: tmpl1
-              template: argocd-sync-and-wait-tmpl1
+              template: argocd-sync-and-wait
             arguments:
               parameters:
                 - name: application-name
