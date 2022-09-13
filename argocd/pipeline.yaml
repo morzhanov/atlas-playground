@@ -18,7 +18,7 @@ spec:
       - name: argocd-server-address
         value: argocd-server.argocd.svc.cluster.local
       - name: argocd-credentials-secret
-        value: argocd-user
+        value: argocd-secret
   templates:
     - name: starter
       steps:
