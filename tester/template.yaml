@@ -13,6 +13,7 @@ spec:
       inputs:
         parameters:
           - name: message
+            default: default-message
       container:
         image: docker/whalesay
         command: [cowsay]
