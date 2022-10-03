@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: testapp
+  namespace: pipeline2-namespace1
+spec:
+  replicas: 1
+  revisionHistoryLimit: 3
+  selector:
+    matchLabels:
+      app: testapp
+  template:
+    metadata:
+      labels:
+        app: testapp
+    spec:
+      containers:
+      - image: argoproj/rollouts-demo:blue
+        name: testapp
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 5000
