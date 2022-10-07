@@ -48,24 +48,32 @@ spec:
             value: "{{inputs.parameters.argocd-server-address}}"
         source: |
           #!/bin/bash
+          
           set -euo pipefail
+          
           if [[ -z $ARGOCD_AUTH_TOKEN ]] && [[ -z "$ARGOCD_USERNAME" || -z "$ARGOCD_PASSWORD" ]]; then
             echo "Either the ARGOCD_AUTH_TOKEN must be specified, or the ARGOCD_USERNAME/ARGOCD_PASSWORD must be specified."
             exit 1
           fi 
+          
           if [ -z $ARGOCD_AUTH_TOKEN ]; then
             yes | argocd login "$ARGOCD_SERVER" --username=$ARGOCD_USERNAME --password=$ARGOCD_PASSWORD {{inputs.parameters.flags}} || echo ${PIPESTATUS[@]}
           fi
+          
           echo "Running as ArgoCD User:"
+          
           argocd account get-user-info {{inputs.parameters.flags}}
-          argocd app create {{inputs.parameters.application-name}} \
-            --repo {{inputs.parameters.application-repo-url}} \
-            --path {{inputs.parameters.application-repo-path}} \
-            --revision {{inputs.parameters.revision}}
-            --dest-server {{inputs.parameters.application-destination-server}} \
-            --dest-namespace {{inputs.parameters.application-destination-namespace}}
+          
+          argocd app create {{inputs.parameters.application-name}} --repo {{inputs.parameters.application-repo-url}} --path {{inputs.parameters.application-repo-path}} --revision {{inputs.parameters.revision}} --dest-server {{inputs.parameters.application-destination-server}} --dest-namespace {{inputs.parameters.application-destination-namespace}}
+          
+          echo "app created"
+          
           argocd app sync {{inputs.parameters.application-name}} --revision {{inputs.parameters.revision}} {{inputs.parameters.flags}}
+          
           argocd app wait {{inputs.parameters.application-name}} --health {{inputs.parameters.flags}}
+          
           ARGOCD_REV=$(argocd app history {{inputs.parameters.application-name}} | grep -o "(.*)" | tail -1 | sed 's/[()]//g')
+          
           ARGOCD_APP={{inputs.parameters.application-name}}
+          
           echo "{\"$ARGOCD_APP\": \"$ARGOCD_REV\"}" > greenops-output.txt
