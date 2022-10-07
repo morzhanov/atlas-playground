@@ -21,6 +21,7 @@ spec:
           - name: revision
           - name: application-repo-url
           - name: application-repo-path
+          - name: application-destination-cluster-name
           - name: application-destination-server
           - name: application-destination-namespace
           - name: flags
@@ -62,6 +63,7 @@ spec:
             --repo {{inputs.parameters.application-repo-url}} \
             --path {{inputs.parameters.application-repo-path}} \
             --revision {{inputs.parameters.revision}}
+            --dest-name {{inputs.parameters.application-destination-cluster-name}}
             --dest-server {{inputs.parameters.application-destination-server}} \
             --dest-namespace {{inputs.parameters.application-destination-namespace}}
           argocd app sync {{inputs.parameters.application-name}} --revision {{inputs.parameters.revision}} {{inputs.parameters.flags}}

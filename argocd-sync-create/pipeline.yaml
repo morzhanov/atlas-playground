@@ -17,6 +17,8 @@ spec:
         value: https://github.com/morzhanov/atlas-playground.git
       - name: application-repo-path
         value: argocd/argo_manifest/dev
+      - name: application-destination-cluster-name
+        value: minikube
       - name: application-destination-server
         value: https://kubernetes.default.svc
       - name: application-destination-namespace
@@ -42,6 +44,8 @@ spec:
                   value: "{{workflow.parameters.application-repo-url}}"
                 - name: application-repo-path
                   value: "{{workflow.parameters.application-repo-path}}"
+                - name: application-destination-cluster-name
+                  value: "{{workflow.parameters.application-destination-cluster-name}}"
                 - name: application-destination-server
                   value: "{{workflow.parameters.application-destination-server}}"
                 - name: application-destination-namespace
