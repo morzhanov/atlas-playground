@@ -1,33 +1,33 @@
 apiVersion: argoproj.io/v1alpha1
 kind: WorkflowTemplate
 metadata:
-  name: argocd-sync-and-wait
+  name: argocd-create-sync-and-wait-
   namespace: argo
 spec:
   workflowMetadata:
-  entrypoint: argocd-sync-and-wait
+  entrypoint: argocd-create-sync-and-wait
   templates:
-    - name: argocd-sync-and-wait
+    - name: argocd-create-sync-and-wait
       outputs:
         parameters:
-        - name: greenops-argocd-info
-          valueFrom:
-            path: greenops-output.txt
+          - name: greenops-argocd-info
+            valueFrom:
+              path: greenops-output.txt
       inputs:
         parameters:
-        - name: argocd-version
-          value: v1.6.0
-        - name: application-name
-        - name: revision
-        - name: application-repo-url
-        - name: application-repo-path
-        - name: application-destination-server
-        - name: application-destination-namespace
-        - name: flags
-          value: --
-        - name: argocd-server-address
-        - name: argocd-credentials-secret
-          value: argocd-user
+          - name: argocd-version
+            value: v1.6.0
+          - name: application-name
+          - name: revision
+          - name: application-repo-url
+          - name: application-repo-path
+          - name: application-destination-server
+          - name: application-destination-namespace
+          - name: flags
+            value: --
+          - name: argocd-server-address
+          - name: argocd-credentials-secret
+            value: argocd-user
       script:
         image: argoproj/argocd:{{inputs.parameters.argocd-version}}
         command: [bash]
