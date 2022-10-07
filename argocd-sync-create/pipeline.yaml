@@ -30,8 +30,8 @@ spec:
       steps:
         - - name: deploy-to-dev-successes1
             templateRef:
-              name: argocd-step
-              template: argocd-sync-and-wait
+              name: argocd-step-with-create
+              template: argocd-create-sync-and-wait
             arguments:
               parameters:
                 - name: application-name
