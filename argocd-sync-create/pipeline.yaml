@@ -1,0 +1,50 @@
+metadata:
+  generateName: argocd-sync-create-
+  namespace: argo
+  labels:
+    clusterName: hubcluster
+spec:
+  entrypoint: starter
+  arguments:
+    parameters:
+      - name: example
+        value: example
+      - name: application-name
+        value: testapp-dev-create
+      - name: revision
+        value: main
+      - name: application-repo-url
+        value: https://github.com/morzhanov/atlas-playground.git
+      - name: application-repo-path
+        value: argocd/argo_manifest/dev
+      - name: application-destination-server
+        value: https://kubernetes.default.svc
+      - name: application-destination-namespace
+        value: argocd
+      - name: argocd-server-address
+        value: argocd-server.argocd.svc.cluster.local
+      - name: argocd-credentials-secret
+        value: argocd-user
+  templates:
+    - name: starter
+      steps:
+        - - name: deploy-to-dev-successes1
+            templateRef:
+              name: argocd-step
+              template: argocd-sync-and-wait
+            arguments:
+              parameters:
+                - name: application-name
+                  value: "{{workflow.parameters.application-name}}"
+                - name: revision
+                  value: "{{workflow.parameters.revision}}"
+                - name: application-repo-url
+                  value: "{{workflow.parameters.application-repo-url}}"
+                - name: application-repo-path
+                  value: "{{workflow.parameters.application-repo-path}}"
+                - name: application-destination-server
+                  value: "{{workflow.parameters.application-destination-server}}"
+                - name: application-destination-namespace
+                  value: "{{workflow.parameters.application-destination-namespace}}"
+                - name: argocd-server-address
+                  value: "{{workflow.parameters.argocd-server-address}}"
