@@ -16,7 +16,7 @@ spec:
       - name: application-repo-url
         value: https://github.com/morzhanov/atlas-playground.git
       - name: application-repo-path
-        value: argocd/argo_manifest/dev
+        value: argocd-sync-create/argo_manifest/dev
       - name: application-destination-cluster-name
         value: minikube
       - name: application-destination-server
