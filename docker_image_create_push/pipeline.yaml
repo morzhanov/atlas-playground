@@ -1,0 +1,58 @@
+metadata:
+  generateName: docker-image-create-push-
+  namespace: argo
+  labels:
+    clusterName: hubcluster
+spec:
+  entrypoint: starter
+  arguments:
+    parameters:
+      - name: repo-url
+        value: github.com/scriptcamp/kubernetes-kaniko
+      - name: dockerfile-path
+        value: Dockerfile
+      - name: git-cred-username
+        value: TODO_PROVIDE_USERNAME_HERE
+      - name: git-cred-token
+        value: TODO_PROVIDE_TOKEN_HERE
+      - name: image-name
+        value: kaniko-demo-image
+      - name: image-tag
+        value: 1.0
+      - name: registry-org-name
+        value: TODO_PROVIDE_ORGNAME_HERE
+      - name: registry-cred-username
+        value: TODO_PROVIDE_USERNAME_HERE
+      - name: registry-cred-email
+        value: TODO_PROVIDE_EMAIL_HERE
+      - name: registry-cred-password
+        value: TODO_PROVIDE_PWD_HERE
+  templates:
+    - name: starter
+      steps:
+        - - name: docker-image-create-push
+            templateRef:
+              name: docker-image-create-push
+              template: docker-image-create-push
+            arguments:
+              parameters:
+                - name: repo-url
+                  value: "{{workflow.parameters.repo-url}}"
+                - name: dockerfile-path
+                  value: "{{workflow.parameters.dockerfile-path}}"
+                - name: git-cred-username
+                  value: "{{workflow.parameters.git-cred-username}}"
+                - name: git-cred-token
+                  value: "{{workflow.parameters.git-cred-token}}"
+                - name: image-name
+                  value: "{{workflow.parameters.image-name}}"
+                - name: image-tag
+                  value: "{{workflow.parameters.image-tag}}"
+                - name: registry-org-name
+                  value: "{{workflow.parameters.registry-org-name}}"
+                - name: registry-cred-username
+                  value: "{{workflow.parameters.registry-cred-username}}"
+                - name: registry-cred-email
+                  value: "{{workflow.parameters.registry-cred-email}}"
+                - name: registry-cred-password
+                  value: "{{workflow.parameters.registry-cred-password}}"
