@@ -8,9 +8,9 @@ spec:
   arguments:
     parameters:
       - name: webhook-url
-        value: TODO_PROVIDE_WEBHOOKS_URL # example: https://hooks.slack.com/services/XXXXXXXXXXX/XXXXXXXXXXX
-      - name: webhook-token
-        value: TODO_PROVIDE_WEBHOOKS_TOKEN # example: XXXXXXXXXXXXXXXXXX
+        value: https://hooks.slack.com/services/T02FT1S6X62/B046XQJGG3F
+      - name: webhook-token-secret
+        value: slack-webhook-token
       - name: message
         value: "Test message!"
   templates:
@@ -24,7 +24,7 @@ spec:
               parameters:
                 - name: webhook-url
                   value: "{{workflow.parameters.webhook-url}}"
-                - name: webhook-token
-                  value: "{{workflow.parameters.webhook-token}}"
+                - name: webhook-token-secret
+                  value: "{{workflow.parameters.webhook-token-secret}}"
                 - name: message
                   value: "{{workflow.parameters.message}}"
