@@ -7,7 +7,7 @@ spec:
   workflowMetadata:
   entrypoint: slack-send-message
   templates:
-    - name: http
+    - name: slack-send-message
       inputs:
         parameters:
           - name: webhook-url
