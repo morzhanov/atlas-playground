@@ -1,14 +1,14 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: testapp-staging
+  name: testapp-staging-rollout
   namespace: argo
 spec:
   project: default
   source:
     repoURL: https://github.com/morzhanov/atlas-playground.git
     targetRevision: main
-    path: deployment-manifest/k8s
+    path: deployment-manifest/k8s-rollout
   destination:
     server: https://kubernetes.default.svc
     namespace: argocd
