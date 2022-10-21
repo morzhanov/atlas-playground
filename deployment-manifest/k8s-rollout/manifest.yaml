@@ -1,0 +1,44 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Rollout
+metadata:
+  name: testapp-rollout
+spec:
+  replicas: 5
+  strategy:
+    canary:
+      steps:
+      - setWeight: 20
+      - pause: {duration: 30}
+      - setWeight: 40
+      - pause: {duration: 30}
+      - setWeight: 60
+      - pause: {duration: 30}
+      - setWeight: 80
+      - pause: {duration: 30}
+  revisionHistoryLimit: 3
+  selector:
+    matchLabels:
+      app: testapp
+  template:
+    metadata:
+      labels:
+        app: testapp
+    spec:
+      containers:
+      - image: docker.io/1mihirpandya/testapp:v2
+        name: testapp
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 5000
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: testapp-rollout
+spec:
+  type: NodePort
+  ports:
+  - port: 5000
+    targetPort: 5000
+  selector:
+    app: testapp-rollout

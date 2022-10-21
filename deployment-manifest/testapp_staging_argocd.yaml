@@ -1,0 +1,14 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: testapp-staging
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/morzhanov/atlas-playground.git
+    targetRevision: main
+    path: deployment-manifest/k8s
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: argocd
