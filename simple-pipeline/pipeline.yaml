@@ -12,7 +12,6 @@ spec:
         templateRef:
           name: argocd-step
           template: argocd-sync-and-wait
-        dependencies: [create-and-verify-pr]
         arguments:
           parameters:
           - name: argocd-version
