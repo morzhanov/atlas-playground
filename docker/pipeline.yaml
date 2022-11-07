@@ -1,0 +1,46 @@
+metadata:
+  generateName: docker-image-create-push-
+  namespace: argo
+  labels:
+    clusterName: hubcluster
+spec:
+  entrypoint: starter
+  arguments:
+    parameters:
+      - name: repo-url
+        value: github.com/scriptcamp/kubernetes-kaniko
+      - name: dockerfile-path
+        value: Dockerfile
+      - name: git-cred-secret
+        value: docker-image-git-cred
+      - name: image-name
+        value: kaniko-demo-image
+      - name: image-tag
+        value: 1.0
+      - name: registry-org-name
+        value: vladmorzhanov
+      - name: registry-dockercred-secret
+        value: dockercred
+  templates:
+    - name: starter
+      steps:
+        - - name: docker-image-create-push
+            templateRef:
+              name: docker-image-create-push
+              template: docker-image-create-push
+            arguments:
+              parameters:
+                - name: repo-url
+                  value: "{{workflow.parameters.repo-url}}"
+                - name: dockerfile-path
+                  value: "{{workflow.parameters.dockerfile-path}}"
+                - name: git-cred-secret
+                  value: "{{workflow.parameters.git-cred-secret}}"
+                - name: image-name
+                  value: "{{workflow.parameters.image-name}}"
+                - name: image-tag
+                  value: "{{workflow.parameters.image-tag}}"
+                - name: registry-org-name
+                  value: "{{workflow.parameters.registry-org-name}}"
+                - name: registry-dockercred-secret
+                  value: "{{workflow.parameters.registry-dockercred-secret}}"

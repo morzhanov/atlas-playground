@@ -1,0 +1,22 @@
+metadata:
+  generateName: misconfigured-
+  namespace: argo
+  labels:
+    clusterName: hubcluster
+spec:
+  entrypoint: starter
+  arguments:
+    parameters:
+      - name: misconfigured-parameter
+        value: "misconfigured parameter value"
+  templates:
+    - name: starter
+      steps:
+        - - name: normal
+            templateRef:
+              name: normal
+              template: normal
+            arguments:
+              parameters:
+                - name: misconfigured-parameter
+                  value: "{{workflow.parameters.misconfigured-parameter}}"

@@ -1,0 +1,34 @@
+metadata:
+  generateName: malformed-
+  namespace: argo
+  labels:
+    clusterName: hubcluster
+spec:
+  entrypoint: starter
+  arguments:
+    parameters:
+      - name: example
+        value: example
+      - name: application-name-dev
+        value: testapp-dev
+      - name: revision
+        value: main
+      - name: argocd-server-address
+        value: argocd-server.argocd.svc.cluster.local
+      - name: argocd-credentials-secret
+        value: argocd-user
+  templates:
+    - name: starter
+      steps:
+        - - name: deploy-to-dev-successes1
+            templateRef:
+              name: argocd-step
+              template: argocd-sync-and-wait
+            arguments:
+              parameters:
+                - name: application-name
+                  value: "{{workflow.parameters.application-name-dev}}"
+                - name: revision
+                  value: "{{workflow.parameters.revision}}"
+                - name: argocd-server-address
+                  value: "{{workflow.parameters.argocd-server-address}}"
