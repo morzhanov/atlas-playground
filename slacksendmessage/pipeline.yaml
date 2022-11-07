@@ -1,5 +1,5 @@
 metadata:
-  generateName: normal-
+  generateName: slack-send-message-
   namespace: argo
   labels:
     clusterName: hubcluster
@@ -7,16 +7,24 @@ spec:
   entrypoint: starter
   arguments:
     parameters:
+      - name: webhook-url
+        value: https://hooks.slack.com/services/T02FT1S6X62/B046XQJGG3F
+      - name: webhook-token-secret
+        value: slack-webhook-token
       - name: message
         value: "Test message!"
   templates:
     - name: starter
       steps:
-        - - name: normal
+        - - name: slack-send-message
             templateRef:
-              name: normal
-              template: normal
+              name: slack-send-message
+              template: slack-send-message
             arguments:
               parameters:
+                - name: webhook-url
+                  value: "{{workflow.parameters.webhook-url}}"
+                - name: webhook-token-secret
+                  value: "{{workflow.parameters.webhook-token-secret}}"
                 - name: message
                   value: "{{workflow.parameters.message}}"
