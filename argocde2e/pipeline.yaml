@@ -1,0 +1,43 @@
+metadata:
+  generateName: argocd
+  namespace: argo
+  labels:
+    clusterName: hubcluster
+spec:
+  entrypoint: starter
+  templates:
+  - name: whalesay            
+    container:
+      image: docker/whalesay
+      command: [cowsay]
+      args: ["hello world"]
+  - name: starter
+    steps:
+    - - name: argocd-app1
+        templateRef:
+          name: argocd-step
+          template: argocd-sync-and-wait
+        arguments:
+          parameters:
+          - name: application-name
+            value: "{{workflow.parameters.application-name}}"
+          - name: revision
+            value: "{{workflow.parameters.revision}}"
+          - name: argocd-server-address
+            value: "{{workflow.parameters.argocd-server-address}}"
+    - - name: first-dummy-step
+        template: whalesay
+    - - name: argocd-app2
+        templateRef:
+          name: argocd-step
+          template: argocd-sync-and-wait
+        arguments:
+          parameters:
+          - name: application-name
+            value: "{{workflow.parameters.application-name-2}}"
+          - name: revision
+            value: "{{workflow.parameters.revision}}"
+          - name: argocd-server-address
+            value: "{{workflow.parameters.argocd-server-address}}"
+    - - name: second-dummy-step
+        template: whalesay

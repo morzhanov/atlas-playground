@@ -1,0 +1,12 @@
+arguments:
+  parameters:
+    - name: application-name
+      value: pipeline1-app1
+    - name: application-name-2
+      value: pipeline1-app2
+    - name: revision
+      value: HEAD
+    - name: argocd-server-address
+      value: argocd-server.argocd.svc.cluster.local
+    - name: argocd-credentials-secret
+      value: argocd-user
