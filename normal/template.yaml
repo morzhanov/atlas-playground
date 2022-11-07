@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: WorkflowTemplate
+metadata:
+  name: normal
+  namespace: argo
+spec:
+  workflowMetadata:
+  entrypoint: normal
+  templates:
+    - name: normal
+      inputs:
+        parameters:
+          - name: message
+      script:
+        image: ellerbrock/alpine-bash-curl-ssl:latest
+        command: [ bash ]
+        source: |
+          #!/bin/bash
+          
+          echo "Normal pipeline message: {{workflow.parameters.message}}"
