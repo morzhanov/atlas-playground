@@ -1,0 +1,26 @@
+arguments:
+  parameters:
+    - name: deploy-to-dev-argocd-version
+      value: v2.0.5
+    - name: deploy-to-dev-application-name
+      value: testapp-dev
+    - name: deploy-to-dev-revision
+      value: main
+    - name: deploy-to-dev-flags
+      value: --
+    - name: deploy-to-dev-argocd-server-address
+      value: argocd-server.argocd.svc.cluster.local
+    - name: deploy-to-dev-argocd-credentials-secret
+      value: argocd-user
+    - name: deploy-to-staging-argocd-version
+      value: v2.0.5
+    - name: deploy-to-staging-application-name
+      value: testapp-staging-rollout
+    - name: deploy-to-staging-revision
+      value: main
+    - name: deploy-to-staging-flags
+      value: --
+    - name: deploy-to-staging-argocd-server-address
+      value: argocd-server.argocd.svc.cluster.local
+    - name: deploy-to-staging-argocd-credentials-secret
+      value: argocd-user
