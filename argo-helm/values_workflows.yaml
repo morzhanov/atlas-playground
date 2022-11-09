@@ -37,7 +37,7 @@ singleNamespace: false
 
 workflow:
   # -- Deprecated; use controller.workflowNamespaces instead.
-  namespace:
+  namespace: argo2
   serviceAccount:
     # -- Specifies whether a service account should be created
     create: false
@@ -173,7 +173,7 @@ controller:
     # -- Prometheus ServiceMonitor labels
     additionalLabels: {}
     # -- Prometheus ServiceMonitor namespace
-    namespace: "" # "monitoring"
+    namespace: argo2 # "monitoring"
   serviceAccount:
     # -- Create a service account for the controller
     create: true
