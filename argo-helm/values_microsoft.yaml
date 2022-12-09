@@ -1242,7 +1242,7 @@ server:
   # @default -- See [values.yaml]
   config:
     # Argo CD's externally facing base URL (optional). Required when configuring SSO
-    url: argocd2.apps.argoproj.io/oauth2/callback
+    url: argocd.apps.argoproj.io/oauth2/callback
     # Argo CD instance label key
     application.instanceLabelKey: argocd.argoproj.io/instance
 
@@ -1272,7 +1272,7 @@ server:
       - id: greenops-sso
         name: GreenOps SSO
         redirectURIs:
-        - argocd2.apps.argoproj.io
+        - argocd.apps.argoproj.io
         secretEnv: GREENOPS_SSO_CLIENT_SECRET
 
   # -- Annotations to be added to Argo CD ConfigMap
@@ -2281,6 +2281,8 @@ notifications:
 
   # -- Contains centrally managed global application subscriptions
   ## For more information: https://argocd-notifications.readthedocs.io/en/stable/subscriptions/
+  subscriptions:
+
   # -- The notification template is used to generate the notification content
   ## For more information: https://argocd-notifications.readthedocs.io/en/stable/templates/
   # -- [Tolerations] for use with node taints
