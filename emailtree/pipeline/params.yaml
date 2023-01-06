@@ -1,11 +1,11 @@
 arguments:
   parameters:
     - name: repository
-      value: "mihirpandya-greenops/testapp_source"
+      value: "morzhanov/atlas-playground"
     - name: branch
       value: "main"
     - name: filepath
-      value: "emailtree/poc/installation-file.yaml"
+      value: "emailtree/installation-file.yaml"
     - name: deploy-argocd-version
       value: v2.0.5
     - name: deploy-revision
