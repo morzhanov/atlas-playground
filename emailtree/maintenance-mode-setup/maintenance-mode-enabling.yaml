@@ -1,0 +1,16 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: pi
+  annotations:
+    argocd.argoproj.io/hook: PreSync #For enabling maintenance mode, use PreSync. For disabling maintenance mode, use PostSync.
+    argocd.argoproj.io/hook-delete-policy: HookSucceeded #After maintenance mode is enabled/disabled, the Job can be deleted for cleanup.
+spec:
+  template:
+    spec:
+      containers: #This is an example container, it should be replaced with the actual container/script that will enable or disable maintenance mode.
+      - name: pi
+        image: perl:5.34.0
+        command: ["perl",  "-Mbignum=bpi", "-wle", "print bpi(2000)"]
+      restartPolicy: Never
+  backoffLimit: 4

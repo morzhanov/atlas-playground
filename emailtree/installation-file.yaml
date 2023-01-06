@@ -1,0 +1,6 @@
+[
+  { "installation": "rollout-env1", "argocd-server-address": "argocd.greenops.io", "argocd-secret-name": "argocd-user" },
+  { "installation": "rollout-env2", "argocd-server-address": "argocd.greenops.io", "argocd-secret-name": "argocd-user" },
+  { "installation": "rollout-env3", "argocd-server-address": "argocd.greenops.io", "argocd-secret-name": "argocd-user" },
+  { "installation": "rollout-env4", "argocd-server-address": "argocd.greenops.io", "argocd-secret-name": "argocd-user" }
+]

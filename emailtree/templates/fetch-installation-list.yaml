@@ -1,0 +1,41 @@
+apiVersion: argoproj.io/v1alpha1
+kind: WorkflowTemplate
+metadata:
+  name: fetch-installation-list
+  namespace: argo
+spec:
+  entrypoint: fetch-installation-list-github
+  templates:
+    - name: fetch-installation-list-github
+      inputs:
+        parameters:
+        - name: repository
+          value: <username OR org name>/<repo>
+        - name: branch
+          value: main
+        - name: filepath
+          value: /folder1/folder2/clusters.yaml
+      script:
+        image: docker.io/greenopsinc/pygithub
+        env:
+          - name: TOKEN
+            valueFrom:
+              secretKeyRef:
+                name: github-pat
+                key: token
+                optional: false
+        command: [python]
+        source: |
+          from github import Github
+          import os
+          import sys
+          import json
+          token = os.getenv('TOKEN')
+          #Getting the requested branch
+          g = Github(token)
+          repo = g.get_repo("{{inputs.parameters.repository}}")
+          #Getting the requested file
+          contents = repo.get_contents("{{inputs.parameters.filepath}}", ref="{{inputs.parameters.branch}}")
+          raw_contents = contents.decoded_content.decode()
+          #Reading and printing list
+          json.dump(json.loads(raw_contents), sys.stdout)

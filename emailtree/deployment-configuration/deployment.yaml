@@ -1,0 +1,97 @@
+#The current Kubernetes Service that is pointing to the active workload.
+apiVersion: v1
+kind: Service
+metadata:
+  name: rollout-bluegreen-active
+spec:
+  ports:
+  - port: 8080
+    targetPort: http
+    protocol: TCP
+    name: http
+  selector:
+    app: rollout-bluegreen
+---
+#The other active Kubernetes Service that is pointing to the active workload, but will point to the new workload during the rollout process.
+apiVersion: v1
+kind: Service
+metadata:
+  name: rollout-bluegreen-preview
+spec:
+  ports:
+  - port: 8080
+    targetPort: http
+    protocol: TCP
+    name: http
+  selector:
+    app: rollout-bluegreen
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Rollout
+metadata:
+  name: rollout-bluegreen
+spec:
+  replicas: 2
+  revisionHistoryLimit: 2
+  selector:
+    matchLabels:
+      app: rollout-bluegreen
+  template:
+    metadata:
+      labels:
+        app: rollout-bluegreen
+    spec:
+      containers:
+      - name: rollouts-demo
+        image: argoproj/rollouts-demo:blue
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8080
+  strategy:
+    blueGreen: 
+#       # activeService specifies the service to update with the new template hash at time of promotion.
+#       # This field is mandatory for the blueGreen update strategy.
+      activeService: rollout-bluegreen-active
+#       # previewService specifies the service to update with the new template hash before promotion.
+#       # This allows the preview stack to be reachable without serving production traffic.
+#       # This field is optional.
+      previewService: rollout-bluegreen-preview
+#       # autoPromotionEnabled disables automated promotion of the new stack by pausing the rollout
+#       # immediately before the promotion. If omitted, the default behavior is to promote the new
+#       # stack as soon as the ReplicaSet are completely ready/available.
+#       # Rollouts can be resumed using: `kubectl argo rollouts promote ROLLOUT`
+      autoPromotionEnabled: false
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: enable-maintenance-mode
+  annotations:
+    argocd.argoproj.io/hook: PreSync #For enabling maintenance mode, use PreSync. For disabling maintenance mode, use PostSync.
+    argocd.argoproj.io/hook-delete-policy: HookSucceeded #After maintenance mode is enabled/disabled, the Job can be deleted for cleanup.
+spec:
+  template:
+    spec:
+      containers: #This is an example container, it should be replaced with the actual container/script that will enable or disable maintenance mode.
+      - name: pi
+        image: perl:5.34.0
+        command: ["perl",  "-Mbignum=bpi", "-wle", "print bpi(2000)"]
+      restartPolicy: Never
+  backoffLimit: 4
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: disable-maintenance-mode
+  annotations:
+    argocd.argoproj.io/hook: PostSync #For enabling maintenance mode, use PreSync. For disabling maintenance mode, use PostSync.
+    argocd.argoproj.io/hook-delete-policy: HookSucceeded #After maintenance mode is enabled/disabled, the Job can be deleted for cleanup.
+spec:
+  template:
+    spec:
+      containers: #This is an example container, it should be replaced with the actual container/script that will enable or disable maintenance mode.
+      - name: pi
+        image: perl:5.34.0
+        command: ["perl",  "-Mbignum=bpi", "-wle", "print bpi(2000)"]
+      restartPolicy: Never
+  backoffLimit: 4

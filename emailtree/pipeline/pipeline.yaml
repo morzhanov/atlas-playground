@@ -1,0 +1,42 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Workflow
+metadata:
+  generateName: emailtree-deployment-
+spec:
+  entrypoint: emailtree-deployment-pipeline
+  templates:
+  - name: emailtree-deployment-pipeline
+    parallelism: 3
+    failFast: true
+    steps:
+    - - name: fetch-installation-list
+        arguments:
+          parameters:
+          - name: repository
+            value: "{{workflow.parameters.repository}}"
+          - name: branch
+            value: "{{workflow.parameters.branch}}"
+          - name: filepath
+            value: "{{workflow.parameters.filepath}}"
+        templateRef:
+          name: fetch-installation-list
+          template: fetch-installation-list-github
+    - - name: rollout-deployment
+        templateRef:
+          name: argocd-step
+          template: argocd-sync-and-wait
+        arguments:
+          parameters:
+          - name: argocd-version
+            value: "{{workflow.parameters.deploy-argocd-version}}"
+          - name: application-name
+            value: "{{item.installation}}"
+          - name: revision
+            value: "{{workflow.parameters.deploy-revision}}"
+          - name: flags
+            value: "{{workflow.parameters.deploy-flags}}"
+          - name: argocd-server-address
+            value: "{{item.argocd-server-address}}"
+          - name: argocd-credentials-secret
+            value: "{{item.argocd-secret-name}}"
+        withParam: "{{steps.fetch-installation-list.outputs.result}}"
