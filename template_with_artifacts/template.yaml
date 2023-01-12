@@ -13,6 +13,8 @@ spec:
           - name: greenops-argocd-info
             valueFrom:
               path: greenops-output.txt
+          - name: out-param
+            value: out-param-value
         artifacts:
           - name: hello-art
             path: /tmp/hello_world.txt
