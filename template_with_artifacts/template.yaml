@@ -18,6 +18,8 @@ spec:
         artifacts:
           - name: hello-art
             path: /tmp/hello_world.txt
+          - name: hello-art-out
+            path: /tmp/hello_world.txt
       inputs:
         parameters:
           - name: argocd-version
@@ -29,6 +31,9 @@ spec:
           - name: argocd-server-address
           - name: argocd-credentials-secret
             value: argocd-user
+        artifacts:
+          - name: hello-art-in
+            path: /tmp/hello_world.txt
       script:
         image: argoproj/argocd:{{inputs.parameters.argocd-version}}
         command: [bash]
