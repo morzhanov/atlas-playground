@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: WorkflowTemplate
+metadata:
+  name: delay
+  namespace: argo
+spec:
+  workflowMetadata:
+  entrypoint: delay
+  templates:
+    - name: delay
+      inputs:
+        parameters:
+          - name: message
+      script:
+        image: ellerbrock/alpine-bash-curl-ssl:latest
+        command: [ bash ]
+        source: |
+          #!/bin/bash
+          
+          sleep 30
