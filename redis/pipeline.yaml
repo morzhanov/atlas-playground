@@ -1,0 +1,37 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Workflow
+metadata:
+  generateName: redis-add-delete
+spec:
+  entrypoint: entry
+  templates:
+    - name: entry
+      dag:
+        tasks:
+          - name: add
+            templateRef:
+              name: redis-add-key
+              template: redis-add-key
+            arguments:
+              parameters:
+                - name: key
+                  value: "{{workflow.parameters.add-key}}"
+                - name: value
+                  value: "{{workflow.parameters.add-value}}"
+                - name: host
+                  value: "{{workflow.parameters.add-host}}"
+                - name: port
+                  value: "{{workflow.parameters.add-port}}"
+          - name: delete
+            templateRef:
+              name: redis-delete-key
+              template: redis-delete-key
+            dependencies: [add]
+            arguments:
+              parameters:
+                - name: key
+                  value: "{{workflow.parameters.delete-key}}"
+                - name: host
+                  value: "{{workflow.parameters.delete-host}}"
+                - name: port
+                  value: "{{workflow.parameters.delete-port}}"

@@ -1,0 +1,16 @@
+arguments:
+  parameters:
+    - name: add-key
+      value: key
+    - name: add-value
+      value: value
+    - name: add-host
+      value: redisserver.greenops.svc.cluster.local
+    - name: add-port
+      value: 6379
+    - name: delete-key
+      value: key
+    - name: delete-host
+      value: redisserver.greenops.svc.cluster.local
+    - name: delete-port
+      value: 6379
