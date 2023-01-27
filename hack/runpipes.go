@@ -8,6 +8,7 @@ import (
 	"log"
 	"net/http"
 	"net/url"
+	"time"
 )
 
 const (
@@ -59,6 +60,8 @@ func CreatePipelines(n int) error {
 		if _, err := PerformRequest("POST", u, []byte(body), nil); err != nil {
 			return err
 		}
+		time.Sleep(time.Second * 1)
+		log.Printf("created pipeline %s", name)
 	}
 	return nil
 }
@@ -70,6 +73,8 @@ func RunPipelines(n int) error {
 		if _, err := PerformRequest("POST", u, nil, nil); err != nil {
 			return err
 		}
+		time.Sleep(time.Second * 2)
+		log.Printf("run pipeline %s", name)
 	}
 	return nil
 }
