@@ -8,7 +8,13 @@ spec:
       container:
         image: goodsmileduck/redis-cli
         command: [redis-cli]
-        args: ["-h {{inputs.parameters.host}} -p {{inputs.parameters.port}} DEL {{inputs.parameters.key}}"]
+        args:
+          - -h
+          - {{inputs.parameters.host}}
+          - -p
+          - {{inputs.parameters.port}}
+          - DEL
+          - {{inputs.parameters.key}}
       inputs:
         parameters:
           - name: key
