@@ -1,0 +1,96 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: greenops-server
+  namespace: greenops
+rules:
+  - apiGroups: ["core", "pipeline.greenopsinc.io"] #All that is needed here is access to secrets & pipelines
+    resources: ["secrets", "namespaces", "pipelines"] #Secrets are used to store information like Git credentials & TLS config
+    verbs: ["*"]  # usage of a wildcard argument here is fine here as we're only allowing it to manage greenops namespace resources
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: greenops-server
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: greenops-server
+subjects:
+  - kind: ServiceAccount
+    name: greenops-server
+    namespace: greenops
+roleRef:
+  kind: ClusterRole
+  name: greenops-server
+  apiGroup: rbac.authorization.k8s.io
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    service: greenops-server
+  name: greenops-server
+spec:
+  type: NodePort
+  ports:
+    - name: "8080"
+      port: 8080
+      targetPort: 8080
+      nodePort: 30007
+  selector:
+    service: greenops-server
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    service: greenops-server
+  name: greenops-server
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      service: greenops-server
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        service: greenops-server
+    spec:
+      serviceAccountName: greenops-server
+      containers:
+        - env:
+            - name: SERVING_PORT
+              value: "8080"
+            - name: ATLAS_DB_ADDRESS
+              value: "redisserver.greenops.svc.cluster.local:6379"
+            - name: REPO_SERVER_ENDPOINT
+              value: "reposerver.greenops.svc.cluster.local:8084"
+            - name: ORG_NAME
+              value: org
+            - name: SERVER_EXTERNAL_URI
+              value: https://localhost:8080
+            - name: SSO_CLIENT_ID
+              value: greenops-sso
+            - name: SSO_CLIENT_SECRET
+              value: FdsqnN7HXp3d9b4V6nhtzcW9jghNDEZYN3bJUFfLEP95QsxGKgd67X4Q7ScR9ztV==
+            - name: SSO_REDIRECT_URI
+              value: https://localhost:8080/oauth2/callback
+            - name: SSO_ISSUER_URI
+              value: https://localhost:8080/api/dex
+            - name: LICENSE_KEY
+              value: 008A19-76D55E-7291AE-EED4C2-638320-V3
+            - name: SSO_PROVIDER_URI
+              value: http://dex-greenops-dex-dex-server.dex.svc.cluster.local:5556
+          image: docker.io/greenopsinc/goserver:testing
+          imagePullPolicy: IfNotPresent
+          name: greenops-server
+          ports:
+            - containerPort: 8080
+          resources: {}
+      imagePullSecrets:
+        - name: regcred
+      restartPolicy: Always
