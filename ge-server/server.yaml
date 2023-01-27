@@ -35,9 +35,9 @@ metadata:
 spec:
   type: NodePort
   ports:
-    - name: "8080"
-      port: 8080
-      targetPort: 8080
+    - name: "8081"
+      port: 8081
+      targetPort: 8081
       nodePort: 30007
   selector:
     service: greenops-server
@@ -64,7 +64,7 @@ spec:
       containers:
         - env:
             - name: SERVING_PORT
-              value: "8080"
+              value: "8081"
             - name: ATLAS_DB_ADDRESS
               value: "redisserver.greenops.svc.cluster.local:6379"
             - name: REPO_SERVER_ENDPOINT
@@ -72,15 +72,15 @@ spec:
             - name: ORG_NAME
               value: org
             - name: SERVER_EXTERNAL_URI
-              value: https://localhost:8080
+              value: https://localhost:8081
             - name: SSO_CLIENT_ID
               value: greenops-sso
             - name: SSO_CLIENT_SECRET
               value: FdsqnN7HXp3d9b4V6nhtzcW9jghNDEZYN3bJUFfLEP95QsxGKgd67X4Q7ScR9ztV==
             - name: SSO_REDIRECT_URI
-              value: https://localhost:8080/oauth2/callback
+              value: https://localhost:8081/oauth2/callback
             - name: SSO_ISSUER_URI
-              value: https://localhost:8080/api/dex
+              value: https://localhost:8081/api/dex
             - name: LICENSE_KEY
               value: 008A19-76D55E-7291AE-EED4C2-638320-V3
             - name: SSO_PROVIDER_URI
@@ -89,7 +89,7 @@ spec:
           imagePullPolicy: IfNotPresent
           name: greenops-server
           ports:
-            - containerPort: 8080
+            - containerPort: 8081
           resources: {}
       imagePullSecrets:
         - name: regcred
