@@ -3,7 +3,7 @@ arguments:
     - name: github-fetch-file-github-repo
       value: morzhanov/atlas-playground
     - name: github-fetch-file-path-to-file
-      value: ghfile/github-fetch-file.yaml
+      value: terraform/terraform-kuber.tf
     - name: github-fetch-file-github-credentials-secret
       value: github-pat
     - name: terraform-plan-config
