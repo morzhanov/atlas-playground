@@ -9,7 +9,7 @@ spec:
         image: hashicorp/terraform
         command: [bash]
         source: |
-          terraform plan -out=/tmp/plan_result.txt
+          terraform plan -out=/tmp/plan_result.tf
       inputs:
         parameters:
           - name: config
@@ -17,4 +17,4 @@ spec:
         parameters:
           - name: plan-result
             valueFrom:
-              path: /tmp/plan_result.txt
+              path: /tmp/plan_result.tf

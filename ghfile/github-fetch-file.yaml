@@ -17,7 +17,7 @@ spec:
         parameters:
           - name: file-contents
             valueFrom:
-              path: /tmp/gh_file.txt
+              path: /tmp/gh_file.tf
       script:
         image: docker.io/greenopsinc/pygithub
         env:
@@ -39,7 +39,7 @@ spec:
           token = os.getenv('TOKEN')
           g = Github(token)
           path_to_file = "{{inputs.parameters.path-to-file}}"
-          local_path = "/tmp/gh_file.txt"
+          local_path = "/tmp/gh_file.tf"
           repo = g.get_repo("{{inputs.parameters.github-repo}}")
           contents = repo.get_contents(path_to_file)
           decoded = base64.b64decode(contents.content)
