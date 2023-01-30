@@ -28,4 +28,4 @@ spec:
             arguments:
               parameters:
                 - name: config
-                  value: "{{tasks.github-fetch-file.outputs.parameters.config}}"
+                  value: "{{tasks.github-fetch-file.outputs.parameters.file-contents}}"
