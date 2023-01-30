@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: WorkflowTemplate
+metadata:
+  name: terraform-plan
+spec:
+  templates:
+    - name: terraform-plan
+      script:
+        image: hashicorp/terraform
+        command: [bash]
+        source: |
+          script
+      inputs:
+        parameters:
+          - name: config
+      outputs:
+        parameters:
+          - name: plan-result
+            valueFrom:
+              path: /tmp/plan_result.txt
