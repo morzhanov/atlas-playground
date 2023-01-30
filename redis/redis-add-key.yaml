@@ -18,6 +18,6 @@ spec:
       script:
         image: redis
         command: [/bin/sh]
-      source: |
-        echo 'Adding key "{{inputs.parameters.key}}" to Redis DB at "{{inputs.parameters.host}}:{{inputs.parameters.port}}"'
-        redis-cli -h {{inputs.parameters.host}} -p {{inputs.parameters.port}} SET {{inputs.parameters.key}} {{inputs.parameters.value}}
+        source: |
+          echo 'Adding key "{{inputs.parameters.key}}" to Redis DB at "{{inputs.parameters.host}}:{{inputs.parameters.port}}"'
+          redis-cli -h {{inputs.parameters.host}} -p {{inputs.parameters.port}} SET {{inputs.parameters.key}} {{inputs.parameters.value}}

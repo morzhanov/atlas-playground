@@ -16,6 +16,6 @@ spec:
       script:
         image: redis
         command: [ /bin/sh ]
-      source: |
-        echo 'Deleting a key "{{inputs.parameters.key}}" in Redis DB at "{{inputs.parameters.host}}:{{inputs.parameters.port}}"'
-        redis-cli -h {{inputs.parameters.host}} -p {{inputs.parameters.port}} DEL {{inputs.parameters.key}}
+        source: |
+          echo 'Deleting a key "{{inputs.parameters.key}}" in Redis DB at "{{inputs.parameters.host}}:{{inputs.parameters.port}}"'
+          redis-cli -h {{inputs.parameters.host}} -p {{inputs.parameters.port}} DEL {{inputs.parameters.key}}
