@@ -1,7 +1,7 @@
 arguments:
   parameters:
     - name: github-fetch-file-github-repo
-      value: morzhanov/atlas-playground-private
+      value: morzhanov/atlas-playground
     - name: github-fetch-file-path-to-file
       value: ghfile/github-fetch-file.yaml
     - name: github-fetch-file-github-credentials-secret
