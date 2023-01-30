@@ -36,5 +36,5 @@ spec:
             dependencies: [terraform-plan]
             arguments:
               parameters:
-                - name: config
+                - name: plan-result
                   value: "{{tasks.terraform-plan.outputs.parameters.plan-result}}"
