@@ -19,4 +19,5 @@ spec:
         source: |
           echo '{{inputs.parameters.config}}' > main.tf
           terraform init
-          terraform plan -out=/tmp/plan_result.tf
+          terraform plan -out=/tmp/plan_result_plain.tf
+          cat /tmp/plan_result_plain.tf | base64 > /tmp/plan_result.tf 

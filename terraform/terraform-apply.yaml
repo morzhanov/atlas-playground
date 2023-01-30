@@ -12,5 +12,5 @@ spec:
         image: hashicorp/terraform
         command: [ /bin/sh ]
         source: |
-          echo '{{inputs.parameters.plan-result}}' > /tmp/tfplan
+          echo '{{inputs.parameters.plan-result}}' | base64 -d > /tmp/tfplan
           terraform apply /tmp/tfplan
