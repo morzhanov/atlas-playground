@@ -29,3 +29,12 @@ spec:
               parameters:
                 - name: config
                   value: "{{tasks.github-fetch-file.outputs.parameters.file-contents}}"
+          - name: terraform-apply
+            templateRef:
+              name: terraform-apply
+              template: terraform-apply
+            dependencies: [terraform-plan]
+            arguments:
+              parameters:
+                - name: config
+                  value: "{{tasks.terraform-plan.outputs.parameters.plan-result}}"
