@@ -5,11 +5,6 @@ metadata:
 spec:
   templates:
     - name: terraform-plan
-      script:
-        image: hashicorp/terraform
-        command: [bash]
-        source: |
-          terraform plan -out=/tmp/plan_result.tf
       inputs:
         parameters:
           - name: config
@@ -18,3 +13,9 @@ spec:
           - name: plan-result
             valueFrom:
               path: /tmp/plan_result.tf
+      script:
+        image: hashicorp/terraform
+        command: [ bash ]
+        source: |
+          echo '{{inputs.parameters.config}}' > main.tf
+          terraform plan -out=/tmp/plan_result.tf
