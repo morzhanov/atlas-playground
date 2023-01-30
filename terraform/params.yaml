@@ -6,3 +6,5 @@ arguments:
       value: ghfile/github-fetch-file.yaml
     - name: github-fetch-file-github-credentials-secret
       value: github-pat
+    - name: terraform-plan-config
+      value: output-github-fetch-file/parameters/file-contents

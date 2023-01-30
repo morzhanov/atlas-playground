@@ -20,3 +20,12 @@ spec:
                   value: "{{workflow.parameters.github-fetch-file-path-to-file}}"
                 - name: github-credentials-secret
                   value: "{{workflow.parameters.github-fetch-file-github-credentials-secret}}"
+          - name: terraform-plan
+            templateRef:
+              name: terraform-plan
+              template: terraform-plan
+            dependencies: [github-fetch-file]
+            arguments:
+              parameters:
+                - name: config
+                  value: "{{tasks.terraform-plan.outputs.parameters.config}}"
