@@ -17,6 +17,6 @@ spec:
         image: hashicorp/terraform
         command: [ /bin/sh ]
         source: |
-          terraform init
           echo '{{inputs.parameters.config}}' > main.tf
+          terraform init
           terraform plan -out=/tmp/plan_result.tf
