@@ -1,10 +1,35 @@
 provider "kubernetes" {
   config_path    = "~/.kube/config"
-  config_context = "my-context"
+  config_context = "minikube"
 }
 
-resource "kubernetes_namespace" "example" {
+resource "kubernetes_ingress" "example_ingress" {
   metadata {
-    name = "my-first-namespace"
+    name = "redis-ingress"
+    namespace = "greenops"
+  }
+
+  spec {
+    backend {
+      service_name = "redisserver"
+      service_port = 6379
+    }
+
+    rule {
+      http {
+        path {
+          backend {
+            service_name = "redisserver"
+            service_port = 6379
+          }
+
+          path = "/"
+        }
+      }
+    }
+
+    tls {
+      secret_name = "ingress-tls"
+    }
   }
 }
