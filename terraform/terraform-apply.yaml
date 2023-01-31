@@ -13,4 +13,5 @@ spec:
         command: [ /bin/sh ]
         source: |
           echo '{{inputs.parameters.plan-result}}' | base64 -d > /tmp/tfplan
+          terraform init
           terraform apply /tmp/tfplan
