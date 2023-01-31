@@ -1,33 +1,30 @@
 provider "kubernetes" {
 }
 
-resource "kubernetes_ingress" "example_ingress" {
+resource "kubernetes_ingress_v1" "minio_ingress" {
   metadata {
     name = "mino-ingress"
     namespace = "argo"
+    annotations = {
+      "nginx.ingress.kubernetes.io/rewrite-target" = "/$1"
+    }
   }
 
   spec {
-    backend {
-      service_name = "minio"
-      service_port = 9000
-    }
-
     rule {
       http {
         path {
-          backend {
-            service_name = "minio"
-            service_port = 9000
-          }
-
           path = "/"
+          backend {
+            service {
+              name = "minio"
+              port {
+                number = 9000
+              }
+            }
+          }
         }
       }
-    }
-
-    tls {
-      secret_name = "ingress-tls"
     }
   }
 }
