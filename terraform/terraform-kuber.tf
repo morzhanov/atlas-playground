@@ -4,21 +4,21 @@ provider "kubernetes" {
 resource "kubernetes_ingress" "example_ingress" {
   metadata {
     name = "redis-ingress"
-    namespace = "greenops"
+    namespace = "argo"
   }
 
   spec {
     backend {
-      service_name = "redisserver"
-      service_port = 6379
+      service_name = "minio"
+      service_port = 9000
     }
 
     rule {
       http {
         path {
           backend {
-            service_name = "redisserver"
-            service_port = 6379
+            service_name = "minio"
+            service_port = 9000
           }
 
           path = "/"
