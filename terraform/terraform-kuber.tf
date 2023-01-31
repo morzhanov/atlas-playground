@@ -3,7 +3,7 @@ provider "kubernetes" {
 
 resource "kubernetes_ingress" "example_ingress" {
   metadata {
-    name = "redis-ingress"
+    name = "mino-ingress"
     namespace = "argo"
   }
 
