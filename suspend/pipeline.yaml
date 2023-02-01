@@ -1,21 +1,21 @@
 metadata:
-  generateName: normal-
+  generateName: suspend-
   namespace: argo
   labels:
     clusterName: hubcluster
 spec:
-  entrypoint: starter
+  entrypoint: suspend
   arguments:
     parameters:
       - name: message
         value: "Test message!"
   templates:
-    - name: starter
+    - name: suspend
       steps:
-        - - name: normal
+        - - name: suspend
             templateRef:
-              name: normal
-              template: normal
+              name: suspend
+              template: suspend
             arguments:
               parameters:
                 - name: message
