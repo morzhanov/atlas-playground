@@ -1,0 +1,22 @@
+metadata:
+  generateName: normal-
+  namespace: argo
+  labels:
+    clusterName: hubcluster
+spec:
+  entrypoint: starter
+  arguments:
+    parameters:
+      - name: message
+        value: "Test message!"
+  templates:
+    - name: starter
+      steps:
+        - - name: normal
+            templateRef:
+              name: normal
+              template: normal
+            arguments:
+              parameters:
+                - name: message
+                  value: "{{workflow.parameters.message}}"
