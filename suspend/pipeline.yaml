@@ -5,18 +5,20 @@ metadata:
     clusterName: hubcluster
 spec:
   entrypoint: suspend
-  arguments:
-    parameters:
-      - name: message
-        value: "Test message!"
   templates:
     - name: suspend
       steps:
-        - - name: suspend
-            templateRef:
-              name: suspend
-              template: suspend
-            arguments:
-              parameters:
-                - name: message
-                  value: "{{workflow.parameters.message}}"
+        - - name: build
+            template: whalesay
+        - - name: delay
+            template: delay
+
+    - name: delay
+      suspend:
+        duration: "20"    # Must be a string. Default unit is seconds. Could also be a Duration, e.g.: "2m", "6h", "1d"
+
+    - name: whalesay
+      container:
+        image: docker/whalesay
+        command: [cowsay]
+        args: ["hello world"]
