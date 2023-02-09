@@ -1,10 +1,10 @@
 metadata:
-  generateName: argocd-testapp-successes1-
+  generateName: argocd-testapp-
   namespace: argo
   labels:
     clusterName: hubcluster
 spec:
-  entrypoint: starter
+  entrypoint: argocd-sync-and-wait
   arguments:
     parameters:
       - name: example
@@ -20,9 +20,9 @@ spec:
       - name: argocd-credentials-secret
         value: argocd-user
   templates:
-    - name: starter
+    - name: argocd-sync-and-wait
       steps:
-        - - name: deploy-to-dev-successes1
+        - - name: argocd-sync-and-wait
             templateRef:
               name: argocd-step
               template: argocd-sync-and-wait
