@@ -30,7 +30,7 @@ spec:
           command:
             - /argosay
           args:
-            - exit 1
+            - exit 0
     ttlStrategy:
       secondsAfterCompletion: 300
     podGC:
