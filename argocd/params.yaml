@@ -7,6 +7,6 @@ arguments:
     - name: revision
       value: main
     - name: argocd-server-address
-      value: argocd-server.argocd.svc.cluster.local
+      value: argo-cd-argocd-server.argocd.svc.cluster.local
     - name: argocd-credentials-secret
       value: argocd-user
