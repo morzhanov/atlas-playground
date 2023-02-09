@@ -11,27 +11,10 @@ spec:
   concurrencyPolicy: "Replace"
   startingDeadlineSeconds: 0
   workflowSpec:
-    arguments:
-      parameters:
-        - name: shouldnotbeoverriden
-          value: should not be overriden
-        - name: message
-          value: hello argo
-    entrypoint: argosay
+    entrypoint: whalesay
     templates:
-      - name: argosay
-        inputs:
-          parameters:
-            - name: message
-              value: '{{workflow.parameters.message}}'
+      - name: whalesay
         container:
-          name: main
-          image: 'argoproj/argosay:v2'
-          command:
-            - /argosay
-          args:
-            - exit 0
-    ttlStrategy:
-      secondsAfterCompletion: 300
-    podGC:
-      strategy: OnPodCompletion
+          image: alpine:3.6
+          command: [sh, -c]
+          args: ["date; sleep 90"]
