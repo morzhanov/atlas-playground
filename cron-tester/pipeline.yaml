@@ -17,4 +17,4 @@ spec:
         container:
           image: alpine:3.6
           command: [sh, -c]
-          args: ["date; sleep 90"]
+          args: ["date; sleep 5"]
