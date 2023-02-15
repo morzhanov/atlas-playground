@@ -34,3 +34,15 @@ spec:
                   value: "{{workflow.parameters.revision}}"
                 - name: argocd-server-address
                   value: "{{workflow.parameters.argocd-server-address}}"
+        - - name: argocd-sync-and-wait-2
+            templateRef:
+              name: argocd-step
+              template: argocd-sync-and-wait
+            arguments:
+              parameters:
+                - name: application-name
+                  value: "{{workflow.parameters.application-name-dev}}"
+                - name: revision
+                  value: "{{workflow.parameters.revision}}"
+                - name: argocd-server-address
+                  value: "{{workflow.parameters.argocd-server-address}}"
