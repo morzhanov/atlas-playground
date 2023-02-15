@@ -41,7 +41,7 @@ spec:
             arguments:
               parameters:
                 - name: application-name
-                  value: "{{workflow.parameters.application-name-dev}}"
+                  value: "{{workflow.parameters.application-name-dev2}}"
                 - name: revision
                   value: "{{workflow.parameters.revision}}"
                 - name: argocd-server-address

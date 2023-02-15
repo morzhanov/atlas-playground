@@ -2,6 +2,8 @@ arguments:
   parameters:
     - name: application-name-dev
       value: testapp-dev
+    - name: application-name-dev2
+      value: testapp-dev2
     - name: application-name-stag
       value: testapp-staging
     - name: revision
