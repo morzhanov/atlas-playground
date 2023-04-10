@@ -1,0 +1,10 @@
+arguments:
+  parameters:
+    - name: application-name-dev
+      value: testapp-dev
+    - name: revision
+      value: main
+    - name: argocd-server-address
+      value: grouped-argocd-server.argocd.svc.cluster.local
+    - name: argocd-credentials-secret
+      value: argocd-user
