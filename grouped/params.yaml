@@ -5,6 +5,6 @@ arguments:
     - name: revision
       value: main
     - name: argocd-server-address
-      value: grouped-argocd-server.argocd.svc.cluster.local
+      value: demoargocd.greenops.io
     - name: argocd-credentials-secret
       value: argocd-user
