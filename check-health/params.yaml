@@ -1,0 +1,4 @@
+arguments:
+  parameters:
+    - name: app-check-argocd-server-address
+      value: demoargocd.greenops.io
