@@ -23,7 +23,7 @@ spec:
       - name: image-name
         value: kaniko-demo-image
       - name: image-tag
-        value: 1.0
+        value: "1.0"
       - name: registry-org-name
         value: vladmorzhanov
       - name: registry-dockercred-secret
