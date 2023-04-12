@@ -7,7 +7,7 @@ metadata:
     example: 'true'
     clusterName: 'hubcluster'
 spec:
-  schedule: "* * * * *"
+  schedule: "*/5 * * * *"
   concurrencyPolicy: "Replace"
   startingDeadlineSeconds: 0
   workflowSpec:
