@@ -1,16 +1,18 @@
 metadata:
-  generateName: argocd-testapp-successes2-
+  generateName: argocd-testapp-
   namespace: argo
   labels:
     clusterName: hubcluster
 spec:
-  entrypoint: starter
+  entrypoint: argocd-sync-and-wait
   arguments:
     parameters:
       - name: example
         value: example
       - name: application-name-dev
         value: testapp-dev
+      - name: application-name-dev2
+        value: testapp-dev2
       - name: application-name-stag
         value: testapp-staging
       - name: revision
@@ -20,16 +22,28 @@ spec:
       - name: argocd-credentials-secret
         value: argocd-user
   templates:
-    - name: starter
+    - name: argocd-sync-and-wait
       steps:
-        - - name: deploy-to-dev-successes2
+        - - name: argocd-sync-and-wait
             templateRef:
-              name: argocd-step3
-              template: argocd-sync-and-wait3
+              name: argocd-step
+              template: argocd-sync-and-wait
             arguments:
               parameters:
                 - name: application-name
                   value: "{{workflow.parameters.application-name-dev}}"
+                - name: revision
+                  value: "{{workflow.parameters.revision}}"
+                - name: argocd-server-address
+                  value: "{{workflow.parameters.argocd-server-address}}"
+        - - name: argocd-sync-and-wait2
+            templateRef:
+              name: argocd-step
+              template: argocd-sync-and-wait
+            arguments:
+              parameters:
+                - name: application-name
+                  value: "{{workflow.parameters.application-name-dev2}}"
                 - name: revision
                   value: "{{workflow.parameters.revision}}"
                 - name: argocd-server-address
