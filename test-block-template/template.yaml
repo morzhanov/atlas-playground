@@ -56,7 +56,7 @@ spec:
           #!/bin/bash
           set -euo pipefail
           if [[ -z $ARGOCD_AUTH_TOKEN ]] && [[ -z "$ARGOCD_USERNAME" || -z "$ARGOCD_PASSWORD" ]]; then
-            echo "UPDATED Either the ARGOCD_AUTH_TOKEN must be specified, or the ARGOCD_USERNAME/ARGOCD_PASSWORD must be specified."
+            echo "UPDATED 2 Either the ARGOCD_AUTH_TOKEN must be specified, or the ARGOCD_USERNAME/ARGOCD_PASSWORD must be specified."
             exit 1
           fi 
           if [ -z $ARGOCD_AUTH_TOKEN ]; then
