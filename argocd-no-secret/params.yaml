@@ -10,3 +10,5 @@ arguments:
       value: main
     - name: argocd-server-address
       value: test-argocd-server.argocd.svc.cluster.local
+    - name: argocd-credentials-secret
+      value: argocd-user
