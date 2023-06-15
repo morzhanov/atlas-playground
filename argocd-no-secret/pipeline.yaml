@@ -16,9 +16,7 @@ spec:
       - name: revision
         value: main
       - name: argocd-server-address
-        value: test-argocd-server.argocd.svc.cluster.local
-      - name: argocd-credentials-secret
-        value: argocd-user
+        value: argocd-server.argocd.svc.cluster.local
   templates:
     - name: argocd-sync-and-wait
       steps:
