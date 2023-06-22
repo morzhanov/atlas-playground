@@ -17,6 +17,8 @@ spec:
         value: main
       - name: argocd-server-address
         value: test-argocd-server.argocd.svc.cluster.local
+      - name: argocd-credentials-secret
+        value: argocd-user
   templates:
     - name: argocd-sync-and-wait
       steps:
@@ -30,5 +32,5 @@ spec:
                   value: "{{workflow.parameters.application-name-dev}}"
                 - name: revision
                   value: "{{workflow.parameters.revision}}"
-                - name: argocd-server-address
-                  value: "{{workflow.parameters.argocd-server-address}}"
+                - name: argocd-credentials-secret
+                  value: "{{workflow.parameters.argocd-credentials-secret}}"
