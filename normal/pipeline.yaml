@@ -6,7 +6,7 @@ spec:
   entrypoint: entry
   automountServiceAccountToken: false
   executor:
-    serviceAccountName: default
+    serviceAccountName: workflow
   arguments:
     parameters:
       - name: argocd-server-address
