@@ -30,3 +30,5 @@ spec:
                   value: "{{workflow.parameters.deploy-to-dev-flags}}"
                 - name: argocd-server-address
                   value: "{{workflow.parameters.argocd-server-address}}"
+                - name: argocd-credentials-secret
+                  value: "{{workflow.parameters.argocd-credentials-secret}}"
