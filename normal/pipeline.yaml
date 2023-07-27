@@ -4,6 +4,10 @@ metadata:
   generateName: normal-
 spec:
   entrypoint: entry
+  arguments:
+    parameters:
+      - name: argocd-server-address
+        value: test-argocd-server.argocd.svc.cluster.local
   templates:
     - name: entry
       dag:
