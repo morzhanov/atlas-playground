@@ -4,6 +4,8 @@ metadata:
   generateName: normal-
 spec:
   entrypoint: entry
+  automountServiceAccountToken: false
+  serviceAccountName: workflow
   arguments:
     parameters:
       - name: argocd-server-address
