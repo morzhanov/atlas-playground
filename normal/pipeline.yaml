@@ -1,22 +1,26 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Workflow
 metadata:
   generateName: normal-
-  namespace: argo
-  labels:
-    clusterName: hubcluster
 spec:
-  entrypoint: starter
-  arguments:
-    parameters:
-      - name: message
-        value: "Test message!"
+  entrypoint: entry
   templates:
-    - name: starter
-      steps:
-        - - name: normal
+    - name: entry
+      dag:
+        tasks:
+          - name: deploy-to-dev
             templateRef:
-              name: normal
-              template: normal
+              name: argocd-step
+              template: argocd-sync-and-wait
             arguments:
               parameters:
-                - name: message
-                  value: "{{workflow.parameters.message}}"
+                - name: argocd-version
+                  value: "{{workflow.parameters.deploy-to-dev-argocd-version}}"
+                - name: application-name
+                  value: "{{workflow.parameters.deploy-to-dev-application-name}}"
+                - name: revision
+                  value: "{{workflow.parameters.deploy-to-dev-revision}}"
+                - name: flags
+                  value: "{{workflow.parameters.deploy-to-dev-flags}}"
+                - name: argocd-server-address
+                  value: "{{workflow.parameters.deploy-to-dev-argocd-server-address}}"
