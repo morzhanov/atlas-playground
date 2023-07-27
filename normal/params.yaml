@@ -9,4 +9,4 @@ arguments:
     - name: deploy-to-dev-flags
       value: --
     - name: argocd-server-address
-      value: argocd.apps.argoproj.io
+      value: argocd-server.argocd.svc.cluster.local
