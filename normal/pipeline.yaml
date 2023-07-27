@@ -7,7 +7,7 @@ spec:
   arguments:
     parameters:
       - name: argocd-server-address
-        value: test-argocd-server.argocd.svc.cluster.local
+        value: argocd-server.argocd.svc.cluster.local
   templates:
     - name: entry
       dag:
@@ -27,4 +27,4 @@ spec:
                 - name: flags
                   value: "{{workflow.parameters.deploy-to-dev-flags}}"
                 - name: argocd-server-address
-                  value: "{{workflow.parameters.deploy-to-dev-argocd-server-address}}"
+                  value: "{{workflow.parameters.argocd-server-address}}"
