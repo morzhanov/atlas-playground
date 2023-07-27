@@ -10,3 +10,5 @@ arguments:
       value: --
     - name: argocd-server-address
       value: argocd-server.argocd.svc.cluster.local
+    - name: argocd-credentials-secret
+      value: argocd-user
